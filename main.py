@@ -1,16 +1,26 @@
-import comparators
-from strategies.BubbleSortStartegy import BubbleSortStrategy
-from comparators import *
+import predicates
+import generators
+
+from strategies.selection_sort_strategy import SelectionSortStrategy
+from strategies.bubble_sort_strategy import BubbleSortStrategy
+from strategies.insertion_sort_strategy import InsertionSortStrategy
+
 
 def sameTypefunc(n):
     return n
 
+
 def main():
-    strategy = BubbleSortStrategy(lambda x:x, comparators.intDes)
 
-    l = [9,2,3,3,4,22,1,9999,223,1]
+    strategy = InsertionSortStrategy(lambda x: x, predicates.strAsc)
 
-    print(strategy.sort(l))
+    nums = generators.ints(0,100,10)
+    print(nums)
+
+    print(strategy.sort(nums))
+    print(strategy.get_result(len(nums)))
+    #print(strategy.get_result(len(nums)))
+
 
 
 
