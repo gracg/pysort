@@ -11,6 +11,10 @@ class BubbleSortStrategy(AbstractStrategy):
 
     def sort(self, nums: list[T]):
 
+        self._check_list_or_raise(nums)
+        if len(nums) <= 1:
+            return nums
+
         while True:
             is_sorted = True
             for i in range(len(nums) - 1):

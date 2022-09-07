@@ -7,7 +7,6 @@ R = TypeVar('R')
 
 
 class AbstractStrategy(ABC):
-
     _strategy_name = "Abstract"
 
     @abstractmethod
@@ -22,6 +21,12 @@ class AbstractStrategy(ABC):
         if (biPredicateFunc is None):
             raise TypeError("predicate functions can't be null")
 
+        if not callable(mapFunc):
+            raise TypeError("mapFunc must be a function")
+
+        if not callable(biPredicateFunc):
+            raise TypeError("biPredicateFunc must be a function")
+
         self._map = mapFunc
         self._predicate = biPredicateFunc
 
@@ -35,4 +40,9 @@ class AbstractStrategy(ABC):
         self._comparison_operations = 0
 
     def get_result(self, size=0):
-        return RunResult(self._strategy_name,size, self._read_operations, self._write_operations, self._comparison_operations)
+        return RunResult(self._strategy_name, size, self._read_operations, self._write_operations,
+                         self._comparison_operations)
+
+    def _check_list_or_raise(self,nums: list):
+        if nums is None:
+            raise ValueError("List cannot be None to sort")

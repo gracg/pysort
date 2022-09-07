@@ -10,6 +10,10 @@ class SelectionSortStrategy(AbstractStrategy):
 
     def sort(self, nums: list[T]):
 
+        self._check_list_or_raise(nums)
+        if len(nums) <= 1:
+            return nums
+
         for i, _ in enumerate(nums):
 
             current_obj = nums[i]

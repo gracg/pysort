@@ -13,6 +13,10 @@ class InsertionSortStrategy(AbstractStrategy):
 
     def sort(self, nums: list[T]):
 
+        self._check_list_or_raise(nums)
+        if len(nums) <= 1:
+            return nums
+
         for i in range(1,len(nums)):
 
             current_obj: T = nums[i]

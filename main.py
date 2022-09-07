@@ -12,7 +12,7 @@ def sameTypefunc(n):
 
 def main():
 
-    strategy = InsertionSortStrategy(lambda x: x, predicates.strAsc)
+    strategy = InsertionSortStrategy(lambda x: x, predicates.intAsc)
 
     nums = generators.ints(0,100,10)
     print(nums)
