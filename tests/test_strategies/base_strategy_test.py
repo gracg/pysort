@@ -12,6 +12,17 @@ class BaseStrategyAbstractTest(abc.ABC, unittest.TestCase):
     def simple_map(self, x):
         return x
 
+    # check if the return type is returning the same list or a new one
+    # raises exception if list is the same by reference
+    def test_return_type_is_copy_not_original(self):
+        if not self._is_abstract:
+            strategy = self.get_strategy()(self.simple_map, predicates.intAsc)
+
+            x = [1]
+            y = strategy.sort(x)
+
+            self.assertFalse(x is y)
+
     def test_sort_none(self):
         if not self._is_abstract:
             strategy = self.get_strategy()(self.simple_map, predicates.intAsc)
