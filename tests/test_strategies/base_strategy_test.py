@@ -34,8 +34,17 @@ class BaseStrategyAbstractTest(abc.ABC, unittest.TestCase):
 
             self.__check_int_sort_asc(nums, l)
 
-    def __check_int_sort_asc(self, original_list, check_list):
+    def test_sort_random_elements_desc(self):
 
+        if not self._is_abstract:
+            nums = generators.ints(1, 100, 10)
+
+            strategy = self.get_strategy()(self.simple_map, predicates.intDes)
+            l = strategy.sort(nums)
+
+            self.__check_int_sort_desc(nums, l)
+
+    def __check_int_sort(self,original_list,check_list,predicate):
         if len(check_list) <= 1:
             return
 
@@ -43,27 +52,33 @@ class BaseStrategyAbstractTest(abc.ABC, unittest.TestCase):
             x = check_list[i - 1]
             y = check_list[i]
 
-            if (x > y):
-                is_sorted = False
+            if predicate(x,y):
                 raise NotSortedException(original_list, check_list)
+
+
+    def __check_int_sort_asc(self, original_list, check_list):
+        return  self.__check_int_sort(original_list,check_list,predicates.intAsc)
+
+    def __check_int_sort_desc(self, original_list, check_list):
+        return self.__check_int_sort(original_list,check_list,predicates.intDes)
 
     def test_sort_two_elements_asc(self):
         if not self._is_abstract:
             strategy = self.get_strategy()(self.simple_map, predicates.intAsc)
-            l = [2, 1]
-            l = strategy.sort(l)
+            original = [2, 1]
+            sorted_list = strategy.sort(original)
 
-            self.assertTrue(l[0] == 1)
-            self.assertTrue(l[1] == 2)
+            self.__check_int_sort_asc(original,sorted_list)
+
+
 
     def test_sort_two_elements_asc(self):
         if not self._is_abstract:
             strategy = self.get_strategy()(self.simple_map, predicates.intDes)
-            l = [1, 2]
-            l = strategy.sort(l)
+            original = [1, 2]
+            sorted_list = strategy.sort(original)
 
-            self.assertTrue(l[0] == 2)
-            self.assertTrue(l[1] == 1)
+            self.__check_int_sort_desc(original,sorted_list)
 
     # supposed to be an abstract method
     # the child classes are supposed to implement this
