@@ -11,6 +11,10 @@ class SelectionSortStrategy(AbstractStrategy):
     def sort(self, nums: list[T]):
 
         self._check_list_or_raise(nums)
+        nums_copy = nums[:]
+        return self._sort(nums_copy)
+
+    def _sort(self,nums: list[T]):
         if len(nums) <= 1:
             return nums
 
