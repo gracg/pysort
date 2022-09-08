@@ -8,6 +8,8 @@ R = TypeVar('R')
 
 class QuickSortStrategy(AbstractStrategy):
 
+    _strategy_name = "Quick Sort"
+
     def sort(self, nums: list[T]):
 
         self._check_list_or_raise(nums)

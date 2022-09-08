@@ -8,6 +8,8 @@ R = TypeVar('R')
 
 class MergeSortStrategy(AbstractStrategy):
 
+    _strategy_name = "Merge Sort"
+
     def sort(self, nums: list[T]):
 
         self._check_list_or_raise(nums)
